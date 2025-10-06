@@ -4,14 +4,14 @@ from PIL import Image
 import numpy as np
 
 st.set_page_config(page_title="Image Click Marker", layout="centered")
-st.title("Click on the Image to Leave Dots")
+st.title("HITL test")
 
 # Step 1: Upload an image
 uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
-    st.write("Click anywhere on the image below to add red dots.")
+    st.write("Click anywhere on the image to add dots")
     
     # Step 2: Use drawable canvas
     canvas_result = st_canvas(
@@ -38,4 +38,4 @@ if uploaded_file is not None:
             st.subheader("Clicked Points:")
             st.write(points)
 else:
-    st.info("👆 Upload an image to begin.")
+    st.info("Upload an image to begin")
