@@ -6,7 +6,7 @@ from PIL import Image
 st.title("Image Click Dot Drawer")
 
 # Maximum dimensions for display
-MAX_WIDTH = 1000
+MAX_WIDTH = 800
 MAX_HEIGHT = 600
 
 def resize_image(image, max_width=MAX_WIDTH, max_height=MAX_HEIGHT):
