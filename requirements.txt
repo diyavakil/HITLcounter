@@ -1,3 +1,2 @@
-streamlit==1.27.2
-streamlit-drawable-canvas
-Pillow
+streamlit>=1.25.0
+Pillow>=9.0.0
