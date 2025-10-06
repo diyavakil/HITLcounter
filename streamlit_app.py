@@ -5,19 +5,34 @@ from PIL import Image
 
 st.title("Image Click Dot Drawer")
 
+# Maximum dimensions for display
+MAX_WIDTH = 800
+MAX_HEIGHT = 600
+
+def resize_image(image, max_width=MAX_WIDTH, max_height=MAX_HEIGHT):
+    """Resize image while preserving aspect ratio."""
+    img = image.copy()
+    img.thumbnail((max_width, max_height), Image.Resampling.LANCZOS)
+    return img
+
 uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png", "gif"])
 
 if uploaded_file is not None:
-    # Read the uploaded image
+    # Read and process the uploaded image
     img_bytes = uploaded_file.read()
     img = Image.open(BytesIO(img_bytes))
-    width, height = img.size
     
-    # Encode to base64
-    base64_img = base64.b64encode(img_bytes).decode()
+    # Resize image to fit within max dimensions
+    resized_img = resize_image(img)
+    width, height = resized_img.size
+    
+    # Convert resized image to bytes for base64 encoding
+    buffered = BytesIO()
+    resized_img.save(buffered, format=img.format if img.format else "PNG")
+    base64_img = base64.b64encode(buffered.getvalue()).decode()
     
     # Get the MIME type
-    mime_type = uploaded_file.type
+    mime_type = uploaded_file.type or "image/png"
     
     # HTML and JavaScript for canvas
     html_code = f"""
